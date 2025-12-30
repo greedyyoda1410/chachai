@@ -608,7 +608,6 @@ export const AdminMenuItems: React.FC = () => {
                 <DialogTitle>{editingItem ? 'Edit Menu Item' : 'Create Menu Item'}</DialogTitle>
               </DialogHeader>
               <form onSubmit={handleSubmit} className="space-y-4">
-                {/* Same form content as above - we'll reuse it */}
                 <div>
                   <Label htmlFor="category_id_tab">Category *</Label>
                   <Select
@@ -627,11 +626,221 @@ export const AdminMenuItems: React.FC = () => {
                     </SelectContent>
                   </Select>
                 </div>
-                {/* Add rest of form fields here - for brevity, I'll add a note to copy from above */}
-                <div className="text-sm text-gray-500 p-4 bg-gray-50 rounded">
-                  Note: Full form fields should be copied from the non-tab context Dialog above.
-                  This is a placeholder to fix the structure.
+
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <Label htmlFor="name_en_tab">Name (English) *</Label>
+                    <Input
+                      id="name_en_tab"
+                      value={formData.name_en}
+                      onChange={(e) => setFormData({ ...formData, name_en: e.target.value })}
+                      required
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="name_bn_tab">Name (Bengali) *</Label>
+                    <Input
+                      id="name_bn_tab"
+                      value={formData.name_bn}
+                      onChange={(e) => setFormData({ ...formData, name_bn: e.target.value })}
+                      required
+                    />
+                  </div>
                 </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <Label htmlFor="description_en_tab">Description (English) *</Label>
+                    <Textarea
+                      id="description_en_tab"
+                      value={formData.description_en}
+                      onChange={(e) => setFormData({ ...formData, description_en: e.target.value })}
+                      required
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="description_bn_tab">Description (Bengali) *</Label>
+                    <Textarea
+                      id="description_bn_tab"
+                      value={formData.description_bn}
+                      onChange={(e) => setFormData({ ...formData, description_bn: e.target.value })}
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-3 gap-4">
+                  <div>
+                    <Label htmlFor="price_tab">Price (Dine-in) *</Label>
+                    <Input
+                      id="price_tab"
+                      type="number"
+                      step="0.01"
+                      value={formData.price}
+                      onChange={(e) => setFormData({ ...formData, price: e.target.value })}
+                      required
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="takeaway_price_tab">Takeaway Price *</Label>
+                    <Input
+                      id="takeaway_price_tab"
+                      type="number"
+                      step="0.01"
+                      value={formData.takeaway_price}
+                      onChange={(e) => setFormData({ ...formData, takeaway_price: e.target.value })}
+                      required
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="prep_time_minutes_tab">Prep Time (minutes) *</Label>
+                    <Input
+                      id="prep_time_minutes_tab"
+                      type="number"
+                      value={formData.prep_time_minutes}
+                      onChange={(e) => setFormData({ ...formData, prep_time_minutes: e.target.value })}
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <Label htmlFor="image_url_tab">Image URL</Label>
+                  <div className="flex gap-2">
+                    <Input
+                      id="image_url_tab"
+                      value={formData.image_url}
+                      onChange={(e) => setFormData({ ...formData, image_url: e.target.value })}
+                      placeholder="Image URL or upload file"
+                    />
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={(e) => {
+                        const file = e.target.files?.[0];
+                        if (file) handleImageUpload(file);
+                      }}
+                      className="hidden"
+                      id="image-upload-tab"
+                    />
+                    <Button
+                      type="button"
+                      variant="outline"
+                      onClick={() => document.getElementById('image-upload-tab')?.click()}
+                      disabled={uploading}
+                    >
+                      <Upload className="w-4 h-4" />
+                    </Button>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label>Order Options</Label>
+                    <div className="flex items-center gap-2">
+                      <Checkbox
+                        id="allow_pickup_tab"
+                        checked={formData.allow_pickup}
+                        onCheckedChange={(checked) =>
+                          setFormData({ ...formData, allow_pickup: checked as boolean })
+                        }
+                      />
+                      <Label htmlFor="allow_pickup_tab" className="cursor-pointer">
+                        Allow Pickup
+                      </Label>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Checkbox
+                        id="allow_delivery_tab"
+                        checked={formData.allow_delivery}
+                        onCheckedChange={(checked) =>
+                          setFormData({ ...formData, allow_delivery: checked as boolean })
+                        }
+                      />
+                      <Label htmlFor="allow_delivery_tab" className="cursor-pointer">
+                        Allow Delivery
+                      </Label>
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <Label>Status</Label>
+                    <div className="flex items-center gap-2">
+                      <Checkbox
+                        id="is_for_sale_tab"
+                        checked={formData.is_for_sale}
+                        onCheckedChange={(checked) =>
+                          setFormData({ ...formData, is_for_sale: checked as boolean })
+                        }
+                      />
+                      <Label htmlFor="is_for_sale_tab" className="cursor-pointer">
+                        For Sale
+                      </Label>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Checkbox
+                        id="is_available_tab"
+                        checked={formData.is_available}
+                        onCheckedChange={(checked) =>
+                          setFormData({ ...formData, is_available: checked as boolean })
+                        }
+                      />
+                      <Label htmlFor="is_available_tab" className="cursor-pointer">
+                        Available
+                      </Label>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Available Add-Ons Section */}
+                <div className="space-y-2">
+                  <Label>Available Add-Ons</Label>
+                  <p className="text-sm text-gray-500 mb-3">
+                    Select which add-ons customers can choose for this menu item. 
+                    New add-ons are not enabled by default.
+                  </p>
+                  <div className="border rounded-lg p-4 max-h-60 overflow-y-auto">
+                    {addOns.length === 0 ? (
+                      <p className="text-sm text-gray-500">No add-ons available</p>
+                    ) : (
+                      <div className="space-y-2">
+                        {addOns.map((addOn) => (
+                          <div key={addOn.id} className="flex items-center gap-2">
+                            <Checkbox
+                              id={`addon-tab-${addOn.id}`}
+                              checked={formData.selectedAddOns.includes(addOn.id)}
+                              onCheckedChange={(checked) => {
+                                if (checked) {
+                                  setFormData({
+                                    ...formData,
+                                    selectedAddOns: [...formData.selectedAddOns, addOn.id],
+                                  });
+                                } else {
+                                  setFormData({
+                                    ...formData,
+                                    selectedAddOns: formData.selectedAddOns.filter(id => id !== addOn.id),
+                                  });
+                                }
+                              }}
+                            />
+                            <Label 
+                              htmlFor={`addon-tab-${addOn.id}`} 
+                              className="cursor-pointer flex-1"
+                            >
+                              <div className="flex items-center justify-between">
+                                <span className="font-medium">{addOn.name_en}</span>
+                                <span className="text-sm text-gray-500">৳{Number(addOn.price).toFixed(2)}</span>
+                              </div>
+                              {addOn.group_name_en && (
+                                <span className="text-xs text-gray-400">{addOn.group_name_en}</span>
+                              )}
+                            </Label>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </div>
+
                 <div className="flex gap-2 justify-end">
                   <Button
                     type="button"
