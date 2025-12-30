@@ -1,0 +1,23 @@
+/* Font imports and font-family definitions */
+/* Add your font imports here */
+
+/* Example:
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600&display=swap');
+*/
+
+/* Default font stack */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Bengali font support */
+.bn, [lang='bn'] {
+  /* Add Bengali fonts here when needed */
+  /* font-family: 'Noto Sans Bengali', sans-serif; */
+}
+
