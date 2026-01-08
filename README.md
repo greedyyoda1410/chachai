@@ -102,8 +102,12 @@ Figma Dump/
 │   ├── styles/              # Global styles
 │   └── main.tsx             # App entry point
 ├── supabase/
-│   ├── migrations/          # Database migrations
-│   └── seed.sql             # Seed data
+│   ├── migrations/          # Database migrations (run in order)
+│   ├── scripts/             # Utility scripts for setup and maintenance
+│   ├── fixes/               # Historical emergency fixes (mostly incorporated into migrations)
+│   ├── seed.sql             # Seed data for development
+│   └── README.md            # Database files documentation
+├── tests/                   # Test files and scripts
 └── index.html               # HTML entry point
 ```
 

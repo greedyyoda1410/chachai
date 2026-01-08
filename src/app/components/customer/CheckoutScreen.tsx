@@ -105,9 +105,9 @@ export const CheckoutScreen: React.FC = () => {
         >
           <Card className="p-4">
             <h2 className="mb-4">Order Type</h2>
-            <RadioGroup value={orderType} onValueChange={(value: any) => setOrderType(value)}>
-              <div className="flex items-center space-x-2 p-3 border rounded-lg mb-2">
-                <RadioGroupItem value="pickup" id="pickup" />
+            <RadioGroup value={orderType} disabled>
+              <div className="flex items-center space-x-2 p-3 border rounded-lg mb-2 bg-orange-50">
+                <RadioGroupItem value="pickup" id="pickup" checked />
                 <Label htmlFor="pickup" className="flex-1 cursor-pointer">
                   <div>Pickup</div>
                   <div className="text-sm text-gray-500">Collect from store</div>
